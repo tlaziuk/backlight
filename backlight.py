@@ -13,8 +13,8 @@ operator = str()
 path = dict()
 max_brightness = dict()
 brightness = dict()
-for i in os.listdir(args.dir):
-	path[i] = os.path.join(args.dir, i)
+for i in os.listdir(args.directory):
+	path[i] = os.path.join(args.directory, i)
 	if (args.verbose):
 		print("found", i)
 for i in path.keys():
