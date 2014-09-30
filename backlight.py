@@ -1,6 +1,7 @@
 #! /usr/bin/env python3
 import argparse
 import os
+import sys
 parser = argparse.ArgumentParser(description="Change brightness of your displays.", prog="backlight")
 parser.add_argument("percentage", metavar="N%", help="change brightness to given percentage value", type=int)
 group1 = parser.add_mutually_exclusive_group()
@@ -13,10 +14,16 @@ operator = str()
 path = dict()
 max_brightness = dict()
 brightness = dict()
+if (not os.path.exists(args.directory)):
+	print("devices path not found ("+args.directory+")", file=sys.stderr)
+	exit(1)
 for i in os.listdir(args.directory):
 	path[i] = os.path.join(args.directory, i)
 	if (args.verbose):
 		print("found", i)
+if (len(path) <= 0):
+	print("there are no display devices in given directory", file=sys.stderr)
+	exit(2)
 for i in path.keys():
 	f = open(os.path.join(path[i], "max_brightness"), "r")
 	max_brightness[i] = int(f.readline()[:-1])
@@ -45,4 +52,4 @@ for i in path.keys():
 	f.close()
 	if (args.verbose):
 		print(i, value)
-	
+exit(0)
