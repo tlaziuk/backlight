@@ -2,6 +2,9 @@
 import argparse
 import os
 import sys
+if not os.geteuid() == 0: 
+    print("root privileges required!" ,file=sys.stderr)
+    exit(1)
 parser = argparse.ArgumentParser(description="Change brightness of your displays.", prog="backlight")
 parser.add_argument("percentage", metavar="N%", help="change brightness to given percentage value", type=int)
 group1 = parser.add_mutually_exclusive_group()
