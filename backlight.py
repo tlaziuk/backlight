@@ -90,6 +90,11 @@ class Brightness:
         for d in self._device:
             d.set(val)
         return self
+    def get(self):
+        result = list()
+        for d in self._device:
+            result.append(d.get())
+        return sum(result)/len(result)
 
 if __name__ == "__main__":
     import argparse
